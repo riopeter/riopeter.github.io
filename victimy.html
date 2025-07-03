@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Victimy</title>
+<style>
+body {background-color: black; color: pink; font-size: 18px}
+</style>
+</head>
+<body>
+<div style="position: fixed; top: 0; left: 0; opacity: 0.99; z-index: -10; width: 100%; height: 100%">
+<video width="100%" height="100%" autoplay muted loop>
+<source src="https://cdn.cloudflare.steamstatic.com/steam/apps/256750319/movie_max.webm?t=1558637430" type="video/webm">
+</video></div>
+<div align="center"> 
+<button onclick="typeWriter()">Turn on Captions</button></div>
+<table align="left">
+<tr>
+<td>
+&nbsp<br>
+&nbsp<br>
+&nbsp<br>
+&nbsp<br>
+&nbsp<br>
+</td>
+</tr>
+<tr>
+<td>
+<p id="talk"></p>
+<script>
+var i = 0;
+var txt = 'Hello! My name is Victimy. I was born in South Korea. I love Peace. Do not use Radar, Sonar, and Electronic Weapon with Electrolyte-Fluid on People. These make The Hacks, Patients with Various Diseases, Wiretappers and High Crimers. I think so.';
+var speed = 100;
+function typeWriter() {
+if (i < txt.length) {
+document.getElementById("talk").innerHTML += txt.charAt(i);
+i++;
+setTimeout(typeWriter, speed);
+}
+}
+</script>
+</td>
+</tr>
+</table>
+</body>
+</html>

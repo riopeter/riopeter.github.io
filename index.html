@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>I Love Peace - rios.w3spaces.com</title>
+<META NAME="description" CONTENT="peace">
+<style>
+body {background-color: black; color: red; font-size: 20px}
+a:link {color: white; background-color: transparent; text-decoration: none}
+a:visited {color: yellow; background-color: transparent; text-decoration: none}
+a:hover {color: pink; background-color: transparent; text-decoration: underline}
+a:active {color: green; background-color: transparent; text-decoration: underline}
+</style>
+<link rel="stylesheet" href="./nstyle.css">
+</head>
+<body>
+<div style="position: absolute; top: 0; left: 0; opacity: 0.99; z-index: -100; width: 100%; height: 100%">
+<video width="100%" height="100%" autoplay muted loop>
+<source src="https://www.desktophut.com/files/NFMADgsEp7-SeriousGirlsLiveWallpaper.mp4" type="video/mp4">
+</video></div>
+<table>
+<tr>
+<td>
+<audio controls style="width: 200px; height: 30px">
+<source src="https://27153.live.streamtheworld.com/AFNP_OSNAAC.aac" type="audio/aac">
+</audio>
+</td>
+<td>
+&nbsp<br>
+</td>
+<td>
+&nbsp<br>
+</td>
+<td align="left" valign="top">
+<a href="https://rios.w3spaces.com/">이종화 : Lee Jong-Hwa : rio25s@naver.com</a>
+</td>
+<td>
+&nbsp<br>
+</td>
+<td>
+&nbsp<br>
+</td>
+<td align="left" valign="top">
+2005-1-3 ~&nbsp 
+</td>
+<td align="left" valign="top">
+<div id="current_date"></div>
+<script>
+date = new Date();
+year = date.getFullYear();
+month = date.getMonth() + 1;
+day = date.getDate();
+document.getElementById("current_date").innerHTML = year + "-" + month + "-" + day;
+</script>
+</td>
+<td>
+&nbsp<br>
+</td>
+<td>
+&nbsp<br>
+</td>
+<td align="left" valign="top">
+<a href="https://www.icc-cpi.int/" target="_blank"><img width="80" height="80" src="https://www.icc-cpi.int/themes/custom/icccpi/logo.svg"></a>
+</td>
+<td>
+&nbsp<br>
+</td>
+<td>
+&nbsp<br>
+</td>
+<td align="left" valign="top">
+<style>
+input[type='button'] {font-size: 20px}
+.button {font-size: 20px}
+</style>
+<input type=button value="We Love Peace with The ICC"<a href=# onClick="window.open('https://www.icc-cpi.int/contact','ICC','left=860 top=240 width=640 height=480');return true"></a>
+</td>
+<td>
+&nbsp<br>
+</td>
+<td>
+&nbsp<br>
+</td>
+<td align="left" valign="top">
+<style>
+input[type='button'] {font-size: 20px}
+.button {font-size: 20px}
+</style>
+<input type=button value="Music Video"<a href=# onClick="window.open('./mv.html','MV','left=860 top=240 width=640 height=480');return true"></a>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<th align="center" valign="top">
+<button class="button" id="button1" onClick="document.getElementById('iFrame1').src='./victimy.html'">Show me The Interview</button><br>
+<iframe frameborder=0 id="iFrame1" width="610px" height="310px"></iframe>
+</th>
+<th align="center" valign="top">
+<button class="button" id="button2">Don't use these on People</button><br>
+<script>
+document.getElementById('button2').addEventListener('click', function () {
+document.getElementById('iFrame2').src='https://www.bing.com/images/search?q=radar&form=HDRSC2&first=1&tsc=ImageBasicHover';
+document.getElementById('iFrame3').src='https://www.bing.com/images/search?q=sonar&form=HDRSC2&first=1&tsc=ImageBasicHover';
+document.getElementById('iFrame4').src='https://www.bing.com/images/search?q=electronic+weapon&form=HDRSC2&first=1&tsc=ImageBasicHover';
+});
+</script>
+<iframe frameborder=0 id="iFrame2" width="250px" height="310px"></iframe>
+<iframe frameborder=0 id="iFrame3" width="250px" height="310px"></iframe>
+<iframe frameborder=0 id="iFrame4" width="250px" height="310px"></iframe>
+</th>
+</tr>
+</table>
+
+
+<!-- partial:index.partial.html -->
+<div class="content">
+
+</div>
+
+<canvas id="neuro"></canvas>
+
+<script type="x-shader/x-fragment" id="vertShader">
+    precision mediump float;
+
+    varying vec2 vUv;
+    attribute vec2 a_position;
+
+    void main() {
+        vUv = .5 * (a_position + 1.);
+        gl_Position = vec4(a_position, 0.0, 1.0);
+    }
+</script>
+
+<script type="x-shader/x-fragment" id="fragShader">
+    precision mediump float;
+
+    varying vec2 vUv;
+    uniform float u_time;
+    uniform float u_ratio;
+    uniform vec2 u_pointer_position;
+    uniform float u_scroll_progress;
+
+    vec2 rotate(vec2 uv, float th) {
+        return mat2(cos(th), sin(th), -sin(th), cos(th)) * uv;
+    }
+
+    float neuro_shape(vec2 uv, float t, float p) {
+        vec2 sine_acc = vec2(0.);
+        vec2 res = vec2(0.);
+        float scale = 8.;
+
+        for (int j = 0; j < 15; j++) {
+            uv = rotate(uv, 1.);
+            sine_acc = rotate(sine_acc, 1.);
+            vec2 layer = uv * scale + float(j) + sine_acc - t;
+            sine_acc += sin(layer);
+            res += (.5 + .5 * cos(layer)) / scale;
+            scale *= (1.2 - .07 * p);
+        }
+        return res.x + res.y;
+    }
+
+    void main() {
+        vec2 uv = .5 * vUv;
+        uv.x *= u_ratio;
+
+        vec2 pointer = vUv - u_pointer_position;
+        pointer.x *= u_ratio;
+        float p = clamp(length(pointer), 0., 1.);
+        p = .5 * pow(1. - p, 2.);
+
+        float t = .001 * u_time;
+        vec3 color = vec3(0.);
+
+        float noise = neuro_shape(uv, t, p);
+
+        noise = 1.2 * pow(noise, 3.);
+        noise += pow(noise, 10.);
+        noise = max(.0, noise - .5);
+        noise *= (1. - length(vUv - .5));
+
+        color = normalize(vec3(.2, .5 + .4 * cos(3. * u_scroll_progress), .5 + .5 * sin(3. * u_scroll_progress)));
+
+        color = color * noise;
+
+        gl_FragColor = vec4(color, noise);
+    }
+</script>
+<!-- partial -->
+  <script  src="./nscript.js"></script>
+
+
+</body>
+</html>
